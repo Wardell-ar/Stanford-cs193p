@@ -17,10 +17,10 @@ struct ContentView: View {
 //            Text("Hello, CS139p!🤓")
 //        }
         HStack{
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
-            CardView()
+            let emojis:[String]=["😗","😙","😚","😘"]
+            ForEach(emojis, id: \.self) {emoji in
+                CardView(content:emoji, isFaceUp: true)
+            }
         }
         .foregroundColor(.orange)
         .padding()
@@ -28,6 +28,9 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    //let常量可以在声明时不初始化，但必须在使用之前进行初始化。一旦赋值，它的值就不能再改变。
+    let content:String
+    
     @State var isFaceUp:Bool=false
 //    var base: RoundedRectangle=RoundedRectangle(cornerRadius: 12)
    
@@ -40,7 +43,7 @@ struct CardView: View {
                     .foregroundColor(.white)
                 base
                     .strokeBorder(lineWidth: 2)
-                Text("🤓")
+                Text(content)
                     .font(.largeTitle)
             }else{
                 base
